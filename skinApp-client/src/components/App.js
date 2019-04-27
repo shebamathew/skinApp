@@ -8,8 +8,10 @@ import LoginPage from '../routes/LoginPage/LoginPage'
 import HomePage from '../routes/HomePage/HomePage'
 import MakeRoutinePage from '../routes/MakeRoutinePage/MakeRoutinePage'
 import MakeProfilePage from '../routes/MakeProfilePage/MakeProfilePage'
+import { makeTypesArray } from '../data.fixtures'
 
 export default class App extends React.Component {
+
   render() {
     return (
       <div className = "App">
@@ -54,11 +56,3 @@ export default class App extends React.Component {
   }
 }
 
-const PRODUCTS = [
-  {step: 1, type: 'Cleanser', product: 'Pibu Face Wash'}, 
-  {step: 2, type: 'Moisturizer', product: 'Pibu Moisturizer'}, 
-  {step: 3, type: 'Sunscreen', product: 'Pibu SPF 50+'}
-]
-const PROFILE = [
-  {skinType: 'dehydrated', climate: 'dry'}
-  ]

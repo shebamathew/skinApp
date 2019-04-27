@@ -1,22 +1,27 @@
 import React from 'react'
+import {makeProfileArray} from '../../data.fixtures'
 
-export default class Profile extends React.Component {
+class Profile extends React.Component {
+  static defaultProps = {
+    profiles: makeProfileArray()
+  }
     render () {
-        // const profileData = this.props.profile
-        //     .map((data, key) => <ListItem {...data} key={key} />);
+        const profile = this.props.profiles[0]
       return (
-        <section>
-            <header>
-              <h2>My Skin Profile</h2>
-            </header>
-            <dl>
-              <dt>My Skin Type</dt>
-                <dd>{this.props.profile[0].skinType}</dd>
-              <dt>My Climate</dt>
-              <dd>{this.props.profile[0].climate}</dd>
-            </dl>
-            <button>Edit Your Skin Profile</button>
-          </section>
+        <div className="Profile">
+        <p>Your Skin Profile</p>
+          <div className="profile-section">
+            <p>Your Skin Type:
+              {profile.skinType}
+            </p>
+          </div>
+          <div className="profile-section">
+            <p>Your Climate:
+              {profile.climate}
+            </p>
+          </div>
+        </div>  
       )
     }
   }
+export default Profile

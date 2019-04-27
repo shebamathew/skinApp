@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+
 export default class LoginForm extends Component {
 
   render() {
     return (
+    <div>
+        <header>
+    <h1> Sign In To Pibu </h1>
+  </header>
       <form
         className='LoginForm'
       >
@@ -22,19 +26,18 @@ export default class LoginForm extends Component {
           <label htmlFor='LoginForm__password'>
             Password
           </label>
-          <input>
+          <input
             type='password'
             required
             name='password'
             id='LoginForm__password'>
           </input>
         </div>
-        <Link to = '/user'>
         <button type='submit'>
           Login
         </button>
-        </Link>
-      </form>
+      </form>>
+      </div>
     )
   }
 
