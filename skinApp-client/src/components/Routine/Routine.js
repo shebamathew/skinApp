@@ -1,6 +1,6 @@
 import React from 'react';
 import './Routine.css';
-import ListItem from '../ListItem/ListItem'
+import Step from '../Step/Step'
 import { makeProductsArray } from '../../data.fixtures'
 
 class Routine extends React.Component {
@@ -10,28 +10,46 @@ class Routine extends React.Component {
 
   render() {
     const product = this.props.products[0]
-        // .map((product, key) => <ListItem {...product} key={key} />);
+
+    // function printProperty(key, value) {
+    //   return `${key}: ${value}`
+    // }
+    // function printPair(product){
+    //   for (let pair in product){
+    //     console.log(printProperty(pair, product[pair]))
+    //   }
+    // }
+    // function printProducts(products){
+    //   for (let i=0; i<products.length; i++){
+    //     printPair(products[i])
+    //   }
+    // }
     return (
       <div className="Routine">
-        <p>Your Skincare Routine</p>
-        <div className="profile-section">
-            <p>Product:
-              {product.productName}
-            </p>
-          </div>
-        <div className="profile-section">
-          <p>Link:
-              {product.productLink}
-          </p>
+        <div className="card-header">
+          <h2>My Skincare Routine</h2>
+          <button>Edit</button>
+          <button>Delete</button>
         </div>
-         <div className="profile-section">
-          <p>Link:
-              {product.productLink}
-          </p>
+        <div className="card-body">
+          <Step />
         </div>
       </div>  
     );
   }
 }
 
+{/* <p>Product:
+              {product.name}
+            </p>
+          </div>
+        <div className="profile-section">
+          <p>Link:
+              {product.link}
+          </p>
+        </div>
+         <div className="profile-section">
+          <p>Type:
+              {product.type}
+          </p> */}
 export default Routine;

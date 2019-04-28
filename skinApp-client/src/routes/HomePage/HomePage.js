@@ -14,9 +14,7 @@ export default class HomePage extends React.Component {
         <header role="banner">
           <h1>My Collection</h1>
         </header>
-        {/* <SearchBar /> */}
-        <Profile />
-        <ProfileForm/>
+        {/* <ProfileForm/> */}
         <Routine />
         <RoutineForm />
       </main>

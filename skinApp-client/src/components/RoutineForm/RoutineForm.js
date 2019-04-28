@@ -12,7 +12,7 @@ export default class RoutineForm extends Component {
 
     render() {
         return (
-            <form id="make-routine">
+            <form id="make-routine" onSubmit={this.handleSubmit}>
                 <p>Add to Your Routine</p>
                 <div className="form-section">
                     <label for="step-number">Step Number</label>
