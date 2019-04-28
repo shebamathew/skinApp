@@ -8,7 +8,6 @@ import LoginPage from '../routes/LoginPage/LoginPage'
 import HomePage from '../routes/HomePage/HomePage'
 import MakeRoutinePage from '../routes/MakeRoutinePage/MakeRoutinePage'
 import MakeProfilePage from '../routes/MakeProfilePage/MakeProfilePage'
-import { makeTypesArray } from '../data.fixtures'
 
 export default class App extends React.Component {
 
