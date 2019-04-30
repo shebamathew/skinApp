@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import Product from '../Product/Product'
 
 class Step extends Component {
+  defaultProps = {
+    products: {}
+  }
   render() {
     return (
         <div className="step-header">
@@ -16,6 +19,8 @@ class Step extends Component {
               />
             )}
           </div>
+          <button type="button">Edit</button>
+          <button onClick={() => this.props.onDeleteStep(this.props.step)} type="button">Delete</button>
         </div>
       )
   }

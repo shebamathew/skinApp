@@ -1,37 +1,37 @@
-function makeStepsArray() {
+function makeSteps() {
     return [
         {
           id: '1',
           name: 'Cleanse',
-          productIds: [0],
+          productIds: ['a'],
         },
         {
           id: '2',
           name: 'Moisturize',
-          productIds: [1],
+          productIds: ['b'],
         },
         {
           id: '3',
           name: 'Sunscreen',
-          productIds: [2],
+          productIds: ['c'],
         },
       ]
 }
 
-function makeProductsArray(){
-    return [
-        { id: 'a', name: 'Pibu Face Wash', link: '/', type: 'cleanser' },
-        { id: 'b', name: 'Pibu Moisturizer', link: '/', type: 'moisturizer' },
-        { id: 'c', name: 'Pibu Sunscreen', link: '/', type:'sunscreen'},
-    ]
+function makeProducts(){
+    return {'a': {name: 'Pibu Face Wash', link: '/', type: 'cleanser' }, 
+           'b': {name: 'Pibu Moisturizer', link: '/', type: 'moisturizer'}, 
+           'c': {name: 'Pibu Sunscreen', link: '/', type:'sunscreen'} 
+    }
 }
 
-function makeProfileArray() {
+
+function makeProfile() {
     return [
-        { skinType: 'Dehydrated', climate: 'Dry' }
+        { skinType: 'Dehydrated', climate: 'Dry', skinConcern: 'Acne' }
     ]
 }
 
 module.exports = {
-    makeProductsArray, makeProfileArray, makeStepsArray
+    makeProducts, makeProfile, makeSteps
 }

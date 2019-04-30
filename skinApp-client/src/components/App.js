@@ -10,6 +10,7 @@ import MakeRoutinePage from '../routes/MakeRoutinePage/MakeRoutinePage'
 import MakeProfilePage from '../routes/MakeProfilePage/MakeProfilePage'
 
 export default class App extends React.Component {
+  
 
   render() {
     return (
@@ -32,8 +33,9 @@ export default class App extends React.Component {
             component={LoginPage}
           /> 
           <Route exact
-            path={'/user'}
+            path={'/home'}
             component={HomePage}
+            // render={(state) => <HomePage {...state} />}
           /> 
           <Route exact
             path={'/user/profile'}

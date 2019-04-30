@@ -1,17 +1,6 @@
 import React from 'react'
-import {makeProfileArray} from '../../data.fixtures'
 
 class Profile extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      skinType: ' ', 
-      climate: ' '
-    }
-  }
-  static defaultProps = {
-    profiles: makeProfileArray()
-  }
     render () {
         const profile = this.props.profiles[0]
       return (
@@ -25,6 +14,11 @@ class Profile extends React.Component {
           <div className="profile-section">
             <p>Your Climate:
               {profile.climate}
+            </p>
+          </div>
+          <div className="profile-section">
+            <p>Your Top Skin Concern:
+              {profile.skinConcern}
             </p>
           </div>
         </div>  

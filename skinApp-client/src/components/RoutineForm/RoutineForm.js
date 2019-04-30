@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 
 export default class RoutineForm extends Component {
-    constructor(props) {
-        super(props)
-        this.state = { routine: ' '}
-    }
+    // constructor(props) {
+    //     super(props)
+    //     this.state = { routine: ' '}
+    // }
     
-    handleSubmit(event){
+    handleSubmit = (event) => {
         event.preventDefault()
+        this.props.onAddStep(event.target.stepToAdd.value)
+        console.log('handleSubmit called')
     }
 
     render() {
@@ -16,15 +18,19 @@ export default class RoutineForm extends Component {
                 <p>Add to Your Routine</p>
                 <div className="form-section">
                     <label for="step-number">Step Number</label>
-                    <input type="number" name="step-number" placeholder="1"/>
+                    <input type="number" name="step-number" placeholder="1" aria-label='Step number' required/>
+                </div>
+                <div className="form-section">
+                    <label for="step-name">Step Name</label>
+                    <input type="text" name="step-name" placeholder="Cleanse" aria-label='Step name' required/>
                 </div>
                 <div className="form-section">
                 <label for="product-name">Product Name</label>
-                    <input type="text" name="product-name" required/>
+                    <input type="text" name="product-name" aria-label='Product name' required/>
                 </div>
                 <div className="form-section">
                     <label for="product-link">Link to Product</label>
-                    <input type="url" name="product-link" required/>
+                    <input type="url" name="product-link" aria-label='Product link' required/>
                 </div>
                 <div className="form-section">
                     <p>Select product type</p>
