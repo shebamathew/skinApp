@@ -1,0 +1,18 @@
+.Nav {
+    position: fixed; 
+    top: 0;
+    width: 100%; 
+    min-height: 100px; 
+    background: grey;  
+    padding: 1% 0; 
+}
+
+.logo {
+    position: absolute; 
+    left: 5%; 
+}
+
+.avatar{
+    position: absolute; 
+    right: 5%; 
+}

@@ -1,24 +1,17 @@
 import React, {Component} from 'react'
 
 export default class ProfileForm extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-          skinType: 'Dehydrated', 
-          climate: 'Arid'
-        }
-        this.handleSubmit = this.handleSubmit.bind(this)
-    }
-    handleSubmit(e){
-        e.preventDefault()
+    handleSubmit = event => {
+        event.preventDefault()
         console.log('form submitted')
     }
 
     render(){
+        const profile = this.props.profiles[0]
         return(
             <>
             <h2>Make Your Skin Profile</h2>
-			<form id="make-profile" onSubmit={this.handleSubmit}>
+			<form id="make-profile" onSubmit={() => this.props.onUpdate(this.props.step)}>
 				<div class="form-section">
                     <p>Select Your Skin Type</p>
                     <ul>
@@ -26,7 +19,7 @@ export default class ProfileForm extends Component {
                             <input 
                                 type="radio"
                                 value="dehydrated"
-                                checked={this.state.skinType === "dehydrated"}
+                                checked={profile.skinType === "dehydrated"}
                                 onChange={this.handleChange}
                             />
                             Dehydrated
@@ -35,7 +28,7 @@ export default class ProfileForm extends Component {
                             <input 
                                 type="radio"
                                 value="dry"
-                                checked={this.state.skinType === "dry"}
+                                checked={profile.skinType === "dry"}
                                 onChange={this.handleChange}
                             />
                             Dry
@@ -44,7 +37,7 @@ export default class ProfileForm extends Component {
                             <input 
                                 type="radio"
                                 value="oily"
-                                checked={this.state.skinType === "oily"}
+                                checked={profile.skinType === "oily"}
                                 onChange={this.handleChange}
                             />
                             Oily
@@ -53,7 +46,7 @@ export default class ProfileForm extends Component {
                             <input 
                                 type="radio"
                                 value="combination"
-                                checked={this.state.skinType === "combination"}
+                                checked={profile.skinType === "combination"}
                                 onChange={this.handleChange}
                             />
                             Combination
@@ -67,7 +60,7 @@ export default class ProfileForm extends Component {
                             <input 
                                 type="radio"
                                 value="arid"
-                                checked={this.state.skinType === "arid"}
+                                checked={profile.climate === "arid"}
                                 onChange={this.handleChange}
                             />
                             Arid
@@ -76,7 +69,7 @@ export default class ProfileForm extends Component {
                             <input 
                                 type="radio"
                                 value="humid"
-                                checked={this.state.skinType === "humid"}
+                                checked={profile.climate === "humid"}
                                 onChange={this.handleChange}
                             />
                             Humid
@@ -90,7 +83,7 @@ export default class ProfileForm extends Component {
                             <input 
                                 type="radio"
                                 value="acne"
-                                checked={this.state.skinType === "acne"}
+                                checked={profile.skinConcern === "acne"}
                                 onChange={this.handleChange}
                             />
                             Acne
@@ -99,7 +92,7 @@ export default class ProfileForm extends Component {
                             <input 
                                 type="radio"
                                 value="hyperpigmentation"
-                                checked={this.state.skinType === "hyperpigmentation"}
+                                checked={profile.skinConcern === "hyperpigmentation"}
                                 onChange={this.handleChange}
                             />
                             Hyperpigmentation
@@ -108,7 +101,7 @@ export default class ProfileForm extends Component {
                             <input 
                                 type="radio"
                                 value="wrinkles"
-                                checked={this.state.skinType === "wrinkles"}
+                                checked={profile.skinConcern === "wrinkles"}
                                 onChange={this.handleChange}
                             />
                             Wrinkles

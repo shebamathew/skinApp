@@ -26,12 +26,12 @@ function makeProducts(){
 }
 
 
-function makeProfile() {
+function makeSkinProfile() {
     return [
         { skinType: 'Dehydrated', climate: 'Dry', skinConcern: 'Acne' }
     ]
 }
 
 module.exports = {
-    makeProducts, makeProfile, makeSteps
+    makeProducts, makeSkinProfile, makeSteps
 }

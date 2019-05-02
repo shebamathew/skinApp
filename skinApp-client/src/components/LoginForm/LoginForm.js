@@ -12,7 +12,7 @@ export default class LoginForm extends Component {
         className='LoginForm'
       >
         <div className='form-section'>
-          <label htmlFor='LoginForm__email'>
+          <label htmlFor='LoginForm__username'>
             User name
           </label>
           <input>

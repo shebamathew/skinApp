@@ -21,6 +21,7 @@ class Profile extends React.Component {
               {profile.skinConcern}
             </p>
           </div>
+          <a href='/user/profile'><button type="button">Edit</button></a>
         </div>  
       )
     }

@@ -3,14 +3,8 @@ import './Routine.css';
 import Step from '../Step/Step'
 
 class Routine extends React.Component {
-  
-  defaultProps = {
-    steps: []
-  }
-
   render() {
-    const steps = this.props.steps
-    const products = this.props.products
+    const { steps, products } = this.props 
     return (
       <div className="routine">
         <div className="card-header">

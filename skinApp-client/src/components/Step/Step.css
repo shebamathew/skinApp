@@ -1,0 +1,25 @@
+.Step {
+    position: absolute;
+    width: 315px;
+    height: 40px;
+    text-align: left; 
+}
+
+.step-header{
+    text-align: left; 
+    padding: 0; 
+}
+
+.step-container {
+    border: 3px black; 
+    border-radius: 3px; 
+    text-align: left; 
+    padding: 0; 
+}
+
+button {
+    font-size: 12px; 
+    border: 3px solid black; 
+    display: block; 
+    text-align: right; 
+}

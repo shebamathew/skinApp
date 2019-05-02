@@ -8,11 +8,49 @@ import LoginPage from '../routes/LoginPage/LoginPage'
 import HomePage from '../routes/HomePage/HomePage'
 import MakeRoutinePage from '../routes/MakeRoutinePage/MakeRoutinePage'
 import MakeProfilePage from '../routes/MakeProfilePage/MakeProfilePage'
+import { makeSteps, makeProducts, makeSkinProfile } from '../data.fixtures'
+
 
 export default class App extends React.Component {
-  
+  state = {
+    routineSteps: makeSteps(), 
+    routineProducts: makeProducts(),
+    userSkinProfile: makeSkinProfile(), 
+  }
+
+  handleDeleteStep = (step) => {
+    const newSteps = this.state.routineSteps.filter(routineStep => routineStep !== step)
+    this.setState({
+      routineSteps: newSteps 
+    })
+  }
+
+  handleAddStep = (stepName) => {
+    // const newSteps = [
+    //   ...this.state.steps, 
+    //   { id: stepNumber, name: stepName, productIds: [productIds] }
+    // ]
+    // this.setState({
+    //   routineSteps: newSteps
+    // })
+    console.log('handle add step', {stepName})
+  }
+
+  handleUpdateSkinProfile(e){
+    const newSkinProfile = {
+      skinType: e.target.value, 
+      climate: e.target.value, 
+      skinConcern: e.target.value
+    }
+    this.setState({
+      userSkinProfile: newSkinProfile
+    })
+  }
 
   render() {
+    const { routineProducts, routineSteps, userSkinProfile } = this.state
+
+    console.log(this.state)
     return (
       <div className = "App">
       <header className='App__header'>
@@ -24,25 +62,32 @@ export default class App extends React.Component {
             path={'/'}
             component={LandingPage}
           /> 
-          <Route exact
+          <Route 
             path={'/register'}
             component={RegistrationPage}
           /> 
-          <Route exact
+          <Route 
             path={'/login'}
             component={LoginPage}
           /> 
-          <Route exact
+          <Route 
             path={'/home'}
-            component={HomePage}
-            // render={(state) => <HomePage {...state} />}
+            render={props => 
+              <HomePage 
+                routineSteps={routineSteps}
+                routineProducts={routineProducts}
+                userSkinProfile={userSkinProfile} 
+                onDeleteStep={this.handleDeleteStep}
+                onAddStep={this.handleAddStep}
+                {...props}
+              />}
           /> 
-          <Route exact
-            path={'/user/profile'}
+          <Route 
+            path={'/profile'}
             component={MakeProfilePage}
           /> 
-          <Route exact
-            path={'/user/routine'}
+          <Route 
+            path={'/routine'}
             component={MakeRoutinePage}
           /> 
         </Switch>

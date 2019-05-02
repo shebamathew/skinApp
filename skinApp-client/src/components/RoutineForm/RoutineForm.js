@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
 
 export default class RoutineForm extends Component {
-    // constructor(props) {
-    //     super(props)
-    //     this.state = { routine: ' '}
-    // }
-    
+
     handleSubmit = (event) => {
         event.preventDefault()
-        this.props.onAddStep(event.target.stepToAdd.value)
+        this.props.onAddStep(event.target.value)
         console.log('handleSubmit called')
     }
 
