@@ -3,7 +3,6 @@ import React, {Component} from 'react'
 export default class ProfileForm extends Component {
     handleSubmit = event => {
         event.preventDefault()
-        console.log('form submitted')
     }
 
     render(){

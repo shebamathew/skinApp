@@ -1,7 +1,12 @@
 import React from 'react'
 
-export default React.createContext({
-    notes: [], 
-    folders: [], 
-    
+const SkinAppContext = React.createContext({
+    routineSteps: [], 
+    routineProducts: {}, 
+    userSkinProfile: [], 
+    addStep: () => {}, 
+    deleteStep: () => {}, 
+    updateSkinProfile: () => {}
 })
+
+export default SkinAppContext

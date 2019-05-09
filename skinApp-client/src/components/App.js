@@ -49,8 +49,6 @@ export default class App extends React.Component {
 
   render() {
     const { routineProducts, routineSteps, userSkinProfile } = this.state
-
-    console.log(this.state)
     return (
       <div className = "App">
       <header className='App__header'>
