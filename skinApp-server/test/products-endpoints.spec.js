@@ -97,7 +97,7 @@ describe('Products Endpoints', function() {
                         .expect(res.body)
                 )
         })
-        const requiredFields = ['title', 'style', 'content']
+        const requiredFields = ['product_name', 'product_link', 'product_type']
 
         requiredFields.forEach(field => {
             const newProduct = {
@@ -118,7 +118,7 @@ describe('Products Endpoints', function() {
             })
         })
     })
-    describe(`DELETE /products/:product_id`, () => {
+    describe.only(`DELETE /products/:product_id`, () => {
         context(`Given product doesn't exist`, () => {
             it(`responds with 404`, () => {
                 const prodId = 12345
