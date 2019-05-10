@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
   res.json({ message:'Hello, world!'})
 })
 
-app.use('/products', productsRouter)
+app.use('/api/products', productsRouter)
 
 app.use(function errorHandler(error, req, res, next){
   let response

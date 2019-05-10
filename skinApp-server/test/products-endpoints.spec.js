@@ -74,13 +74,13 @@ describe('Products Endpoints', function() {
             })
         })
     })
-    describe.only(`POST /products`, () => {
-        it(`adds a product, responding with 201 and the added product`, function () {
-            const newProduct = {
-                product_name: 'Test product name',
-                product_link: 'http://www.google.com',
-                product_type: 'Test product type'
-            }
+    describe(`POST /products`, () => {
+        const newProduct = {
+            product_name: 'Test product name',
+            product_link: 'http://www.google.com',
+            product_type: 'Test product type'
+        }
+        it.only(`adds a product, responding with 201 and the added product`, function () {
             return supertest(app)
                 .post('/products')
                 .send(newProduct)
@@ -100,12 +100,6 @@ describe('Products Endpoints', function() {
         const requiredFields = ['product_name', 'product_link', 'product_type']
 
         requiredFields.forEach(field => {
-            const newProduct = {
-                product_name: 'Test product name',
-                product_link: 'http://www.google.com',
-                product_type: 'Test product type'
-            }
-
             it(`responds with 400 and an error message when the '${field}' is missing`, () => {
                 delete newProduct[field]
 
@@ -118,16 +112,13 @@ describe('Products Endpoints', function() {
             })
         })
     })
-    describe.only(`DELETE /products/:product_id`, () => {
+    describe(`DELETE /products/:product_id`, () => {
         context(`Given product doesn't exist`, () => {
             it(`responds with 404`, () => {
-                const prodId = 12345
                 return supertest(app)
-                    .delete(`/products/${prodId}`)
+                    .delete(`/products/12345`)
                     .expect(404, {
-                        error: {
-                            message: `Product doesn't exist`
-                        }
+                        error: { message: `Product doesn't exist`}
                     })
             })
         })
@@ -139,13 +130,13 @@ describe('Products Endpoints', function() {
                     .insert(testProducts)
             })
 
-            it('responds with 204 and removes the specified product', () => {
+            it.only('responds with 204 and removes the specified product', () => {
                 const idToRemove = 2
                 const expectedProducts = testProducts.filter(prod => prod.id !== idToRemove)
                 return supertest(app)
                     .delete(`/products/${idToRemove}`)
                     .expect(204)
-                    .then(() => 
+                    .then(res => 
                         supertest(app)
                         .get(`/products`)
                         .expect(expectedProducts)

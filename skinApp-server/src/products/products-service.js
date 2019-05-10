@@ -4,11 +4,11 @@ const knex = require('knex')
 const ProductsService = {
   getAllProducts(knex) {
     return knex
-      .from('skinapp_product')
+      .from('skinapp_products')
       .select('*')
   },
   getById(knex, id) {
-    return knex.from('skinApp_products').select('*').where('id', id).first()
+    return knex.from('skinapp_products').select('*').where('id', id).first()
   },
   insertProduct(knex, newProduct){
     return knex
