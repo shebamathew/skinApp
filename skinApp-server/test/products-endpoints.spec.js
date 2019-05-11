@@ -25,11 +25,11 @@ describe('Products Endpoints', function() {
 
     afterEach('cleanup', () => helpers.cleanTables(db))
 
-    describe(`GET /products`, () => {
+    describe(`GET /api/products`, () => {
         context(`Given no products`, () => {
             it(`responds with 200 and an empty list`, () => {
                 return supertest(app)
-                    .get('/products')
+                    .get('/api/products')
                     .expect(200, [])
             })
         })
@@ -39,19 +39,19 @@ describe('Products Endpoints', function() {
                     .into('skinapp_products')
                     .insert(testProducts)
             })
-            it('GET /products responds with 200 and all the products', () => {
+            it('GET /api/products responds with 200 and all the products', () => {
                 return supertest(app)
-                    .get('/products')
+                    .get('/api/products')
                     .expect(200, testProducts)
             })
         })
     })
-    describe(`GET /products/:product_id`, () => {
+    describe(`GET /api/products/:product_id`, () => {
         context(`Given product doesn't exist`, () => {
             it(`responds with 404`, () => {
                 const testId = 12345
                 return supertest(app)
-                    .get(`/products/${testId}`)
+                    .get(`/api/products/${testId}`)
                     .expect(404, {
                         error: {
                             message: `Product doesn't exist`
@@ -69,20 +69,20 @@ describe('Products Endpoints', function() {
                 const prodId = 2
                 const expectedProd = testProducts[prodId - 1]
                 return supertest(app)
-                    .get(`/products/${prodId}`)
+                    .get(`/api/products/${prodId}`)
                     .expect(200, expectedProd)
             })
         })
     })
-    describe(`POST /products`, () => {
+    describe.only(`POST /api/products`, () => {
         const newProduct = {
             product_name: 'Test product name',
             product_link: 'http://www.google.com',
             product_type: 'Test product type'
         }
-        it.only(`adds a product, responding with 201 and the added product`, function () {
+        it(`adds a product, responding with 201 and the added product`, function() {
             return supertest(app)
-                .post('/products')
+                .post('/api/products')
                 .send(newProduct)
                 .expect(201)
                 .expect(res => {
@@ -93,7 +93,7 @@ describe('Products Endpoints', function() {
                 })
                 .then(res =>
                     supertest(app)
-                        .get(`/products/${res.body.id}`)
+                        .get(`/api/products/${res.body.id}`)
                         .expect(res.body)
                 )
         })
@@ -102,9 +102,8 @@ describe('Products Endpoints', function() {
         requiredFields.forEach(field => {
             it(`responds with 400 and an error message when the '${field}' is missing`, () => {
                 delete newProduct[field]
-
                 return supertest(app)
-                    .post('/products')
+                    .post('/api/products')
                     .send(newProduct)
                     .expect(400, {
                         error: { message: `Missing '${field}' in request body` }
@@ -112,11 +111,11 @@ describe('Products Endpoints', function() {
             })
         })
     })
-    describe(`DELETE /products/:product_id`, () => {
+    describe(`DELETE /api/products/:product_id`, () => {
         context(`Given product doesn't exist`, () => {
             it(`responds with 404`, () => {
                 return supertest(app)
-                    .delete(`/products/12345`)
+                    .delete(`/api/products/12345`)
                     .expect(404, {
                         error: { message: `Product doesn't exist`}
                     })
@@ -130,17 +129,26 @@ describe('Products Endpoints', function() {
                     .insert(testProducts)
             })
 
-            it.only('responds with 204 and removes the specified product', () => {
+            it('responds with 204 and removes the specified product', () => {
                 const idToRemove = 2
                 const expectedProducts = testProducts.filter(prod => prod.id !== idToRemove)
                 return supertest(app)
-                    .delete(`/products/${idToRemove}`)
+                    .delete(`/api/products/${idToRemove}`)
                     .expect(204)
                     .then(res => 
                         supertest(app)
-                        .get(`/products`)
+                        .get(`/api/products`)
                         .expect(expectedProducts)
                     )
+            })
+        })
+    })
+    describe(`PATCH /api/products/:product_id`, () => {
+        context(`Given no products`, () => {
+            it(`responds with 404`, () => {
+                return supertest(app)
+                    .patch(`/api/products/12345`)
+                    .expect(404, { error: { message: `Product doesn't exist`} })
             })
         })
     })

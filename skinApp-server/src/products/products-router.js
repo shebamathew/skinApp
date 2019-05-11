@@ -1,9 +1,17 @@
 const express = require('express')
 const ProductsService = require('./products-service')
+const path = require('path')
 
 const productsRouter = express.Router()
 const jsonParser = express.json()
 // const logger = require('./logger')
+
+const serializeProduct = product => ({
+  id: bookmark.id,
+  product_name: product.product_name,
+  product_link: product.product_link, 
+  product_type: product.product_type
+})
 
 productsRouter
   .route('/')
@@ -26,16 +34,13 @@ productsRouter
           error: { message: `Product doesn't exist` }
         })
       }
-    res.json(product)
+    res.product = product
+    next()
   })
     .catch(next)
   })
-  .get((req, res, next) => {
-    ProductsService.getAllProducts(req.app.get('db'), req.params.product_id)
-      .then(product => {
-        res.json(product)
-      })
-      .catch(next)
+  .get((req, res) => {
+    res.json(serializeProduct(res.product))
   })
   .delete((req, res, next) => {
     ProductsService.deleteProduct(req.app.get('db'), req.params.product_id)
@@ -50,16 +55,23 @@ productsRouter
   .post(jsonParser, (req, res) => {
     const { product_name, product_link, product_type } = req.body
     const newProduct = { product_name, product_link, product_type }
+    console.log('*****testing return*****', req.body)
+      for (const [key, value] of Object.entries(newProduct)) 
+        if (value === null)
+          return res.status(400).json({
+            error: { message: 'Missing ${key} in request body'}
+          })
     ProductsService.insertProduct(
       req.app.get('db'), 
       newProduct
     )
     .then(product => {
       res.status(201)
-      .location(`/products/${product.id}`)
+      .location(path.posix.join(req.originalUrl, `/${product.id}`))
       .json(product)
     })
   })
+
 async function checkProductExists(req, res, next) {
   try {
     const product = await ProductsService.getById(
