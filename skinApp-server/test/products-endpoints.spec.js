@@ -74,7 +74,7 @@ describe('Products Endpoints', function() {
             })
         })
     })
-    describe.only(`POST /api/products`, () => {
+    describe(`POST /api/products`, () => {
         const newProduct = {
             product_name: 'Test product name',
             product_link: 'http://www.google.com',
@@ -86,8 +86,8 @@ describe('Products Endpoints', function() {
                 .send(newProduct)
                 .expect(201)
                 .expect(res => {
-                    expect(res.body.product_name).to.eql(newProduct.product_name),
-                        expect(res.body.prodcut_link).to.eql(newProduct.product_link),
+                        expect(res.body.product_name).to.eql(newProduct.product_name),
+                        expect(res.body.product_link).to.eql(newProduct.product_link),
                         expect(res.body.product_type).to.eql(newProduct.product_type),
                         expect(res.body).to.have.property('id')
                 })
@@ -149,6 +149,35 @@ describe('Products Endpoints', function() {
                 return supertest(app)
                     .patch(`/api/products/12345`)
                     .expect(404, { error: { message: `Product doesn't exist`} })
+            })
+        })
+        context('Given there are products in the database', () => {
+            beforeEach('insert products', () => {
+                return db
+                    .into('skinapp_products')
+                    .insert(testProducts)
+            })
+
+            it('responds with 204 and updates the specified product', () => {
+                const idToUpdate = 3
+                const updateProduct = {
+                    product_name: 'update product name',
+                    product_link: 'http://www.google.com',
+                    product_type: 'update product type'
+                }
+                const expectedProduct = {
+                    ...testProducts[idToUpdate-1], 
+                    ...updateProduct
+                }
+                return supertest(app)
+                    .patch(`/api/products/${idToUpdate}`)
+                    .send(updateProduct)
+                    .expect(204)
+                    .then(res => 
+                        supertest(app)
+                        .get(`/api/products/${idToUpdate}`)
+                        .expect(expectedProduct)
+                    )
             })
         })
     })

@@ -6,7 +6,10 @@ const SkinAppContext = React.createContext({
     userSkinProfile: [], 
     addStep: () => {}, 
     deleteStep: () => {}, 
-    updateSkinProfile: () => {}
+    updateSkinProfile: () => {}, 
+    addProduct: () => {}, 
+    deleteProduct: () => {}, 
+    updateProduct: () => {}
 })
 
 export default SkinAppContext

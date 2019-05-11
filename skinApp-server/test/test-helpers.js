@@ -1,22 +1,24 @@
+const bcrypt = require('bcryptjs')
+
 function makeUsersArray() {
     return [
         {
             id: 1,
             email: 'tu1@pibulab.com',
             username: 'test-user-1',
-            password: 'password'
+            pass: 'password'
         },
         {
             id: 2,
             email: 'tu2@pibulab.com',
             username: 'test-user-2',
-            password: 'password'
+            pass: 'password'
         },
         {
             id: 3,
             email: 'tu3@pibulab.com',
             username: 'test-user-3',
-            password: 'password'
+            pass: 'password'
         }
     ]
 }
@@ -53,9 +55,9 @@ function makeProductsFixtures() {
 function cleanTables(db) {
     return db.raw(
       `TRUNCATE
-        skinApp_products, 
-        skinApp_users, 
-        skinApp_skinProfiles
+        skinapp_products, 
+        skinapp_users, 
+        skinapp_skinprofiles
         RESTART IDENTITY CASCADE`
     )
 }
@@ -63,12 +65,12 @@ function cleanTables(db) {
 function seedUsers(db, users) {
     const preppedUsers = users.map(user => ({
       ...user, 
-      password: bcrypt.hashSync(user.password, 1)
+      pass: bcrypt.hashSync(user.pass, 1)
     }))
-    return db.into('skinApp_users').insert(preppedUsers)
+    return db.into('skinapp_users').insert(preppedUsers)
       .then(() => 
         db.raw(
-          `SELECT setval ('thingful_users_id_seq', ?)`, 
+          `SELECT setval ('skinapp_users_id_seq', ?)`, 
           [users[users.length-1].id], 
         )
       )

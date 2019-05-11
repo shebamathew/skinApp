@@ -4,15 +4,15 @@ const bcrypt = require('bcryptjs')
 
 const UsersService = {
     hasUserWithUserName(db, username){
-        return db('skinApp_users')
-            .where( {username })
+        return db('skinapp_users')
+            .where( {username})
             .first()
             .then(user => !!user)
     }, 
     insertUser(db, newUser) {
         return db
             .insert(newUser)
-            .into('skinApp_users')
+            .into('skinapp_users')
             .returning('*')
             .then(([user]) => user )
     }, 
@@ -37,9 +37,9 @@ const UsersService = {
     serializeUser(user){
         return{
             id: user.id, 
-            user_name: xss(user.user_name), 
-            nickname: xss(user.nick_name), 
-            date_created: new Date(user.date_created), 
+            email: user.email, 
+            username: user.username, 
+            pass: user.pass, 
         }
     }, 
 }

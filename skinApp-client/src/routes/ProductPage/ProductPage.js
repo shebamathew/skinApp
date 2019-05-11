@@ -13,11 +13,6 @@ export default class HomePage extends React.Component {
           <h1>My Skin Lab</h1>
         </header>
         <section>
-          <Profile
-            profiles={userSkinProfile}
-          />
-        </section>
-        <section>
           <Routine
             steps={routineSteps}
             products = {routineProducts} 
@@ -25,12 +20,10 @@ export default class HomePage extends React.Component {
           />
         </section>
         <section>
-          <RoutineForm
-            onAddStep = {onAddStep}
+          <ProductForm
           />
         </section>
       </main>
     );
   }
 }
-

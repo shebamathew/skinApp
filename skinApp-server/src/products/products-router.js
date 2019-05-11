@@ -7,7 +7,7 @@ const jsonParser = express.json()
 // const logger = require('./logger')
 
 const serializeProduct = product => ({
-  id: bookmark.id,
+  id: product.id,
   product_name: product.product_name,
   product_link: product.product_link, 
   product_type: product.product_type
@@ -49,18 +49,33 @@ productsRouter
       })
       .catch(next)
   })
+  .patch(jsonParser, (req, res, next) => {
+    const { product_name, product_link, product_type } = req.body
+    const productToUpdate = { product_name, product_link, product_type }
+    ProductsService.updateProduct(
+      req.app.get('db'), 
+      req.params.product_id,
+      productToUpdate
+    )
+    .then(rowsAffected => {
+      res.status(204).end()
+    })
+    .catch(next)
+  })
 
 productsRouter 
   .route('/')
   .post(jsonParser, (req, res) => {
     const { product_name, product_link, product_type } = req.body
-    const newProduct = { product_name, product_link, product_type }
     console.log('*****testing return*****', req.body)
-      for (const [key, value] of Object.entries(newProduct)) 
-        if (value === null)
-          return res.status(400).json({
-            error: { message: 'Missing ${key} in request body'}
-          })
+    let requiredFields = ['product_name', 'product_link', 'product_type']
+
+    requiredFields.forEach(field=> {
+      if(!req.body.hasOwnProperty(field)){
+        res.status(400).send(`Missing ${field} in req.body`);
+      }
+    })
+    const newProduct = { product_name, product_link, product_type }
     ProductsService.insertProduct(
       req.app.get('db'), 
       newProduct

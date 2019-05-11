@@ -13,15 +13,15 @@ import { makeSteps, makeProducts, makeSkinProfile } from '../data.fixtures'
 
 export default class App extends React.Component {
   state = {
-    routineSteps: makeSteps(), 
+    routineSteps: makeSteps(),
     routineProducts: makeProducts(),
-    userSkinProfile: makeSkinProfile(), 
+    userSkinProfile: makeSkinProfile(),
   }
 
   handleDeleteStep = (step) => {
     const newSteps = this.state.routineSteps.filter(routineStep => routineStep !== step)
     this.setState({
-      routineSteps: newSteps 
+      routineSteps: newSteps
     })
   }
 
@@ -33,13 +33,13 @@ export default class App extends React.Component {
     // this.setState({
     //   routineSteps: newSteps
     // })
-    console.log('handle add step', {stepName})
+    console.log('handle add step', { stepName })
   }
 
-  handleUpdateSkinProfile(e){
+  handleUpdateSkinProfile(e) {
     const newSkinProfile = {
-      skinType: e.target.value, 
-      climate: e.target.value, 
+      skinType: e.target.value,
+      climate: e.target.value,
       skinConcern: e.target.value
     }
     this.setState({
@@ -50,47 +50,53 @@ export default class App extends React.Component {
   render() {
     const { routineProducts, routineSteps, userSkinProfile } = this.state
     return (
-      <div className = "App">
-      <header className='App__header'>
-          <Nav />
-        </header>
-      <main className='App__main'>
-        <Switch>
-          <Route exact
-            path={'/'}
-            component={LandingPage}
-          /> 
-          <Route 
-            path={'/register'}
-            component={RegistrationPage}
-          /> 
-          <Route 
-            path={'/login'}
-            component={LoginPage}
-          /> 
-          <Route 
-            path={'/home'}
-            render={props => 
-              <HomePage 
-                routineSteps={routineSteps}
-                routineProducts={routineProducts}
-                userSkinProfile={userSkinProfile} 
-                onDeleteStep={this.handleDeleteStep}
-                onAddStep={this.handleAddStep}
-                {...props}
-              />}
-          /> 
-          <Route 
-            path={'/profile'}
-            component={MakeProfilePage}
-          /> 
-          <Route 
-            path={'/routine'}
-            component={MakeRoutinePage}
-          /> 
-        </Switch>
-      </main>
-      </div>
+      <SkinAppContext.Provider>
+        <div className="App">
+          <header className='App__header'>
+            <Nav />
+          </header>
+          <main className='App__main'>
+            <Switch>
+              <Route exact
+                path={'/'}
+                component={LandingPage}
+              />
+              <Route
+                path={'/register'}
+                component={RegistrationPage}
+              />
+              <Route
+                path={'/login'}
+                component={LoginPage}
+              />
+              <Route
+                path={'/home'}
+                render={props =>
+                  <HomePage
+                    routineSteps={routineSteps}
+                    routineProducts={routineProducts}
+                    userSkinProfile={userSkinProfile}
+                    onDeleteStep={this.handleDeleteStep}
+                    onAddStep={this.handleAddStep}
+                    {...props}
+                  />}
+              />
+              <Route
+                path={'/profile'}
+                component={MakeProfilePage}
+              />
+              <Route
+                path={'/routine'}
+                component={MakeRoutinePage}
+              />
+              <Route
+                path={'/edit/:productId'}
+                component={EditProduct}
+              />
+            </Switch>
+          </main>
+        </div>
+      </SkinAppContext.Provider>
     );
   }
   componentDidMount() {

@@ -6,7 +6,7 @@ const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 // TODO: what is client origin???
 const productsRouter = require('./products/products-router')
-const ProductsService = require('./products/products-service')
+const usersRouter = require('./users/users-router')
 const app = express()
 
 const morganOption = NODE_ENV === 'production'
@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/products', productsRouter)
+app.use('/api/users', usersRouter)
 
 app.use(function errorHandler(error, req, res, next){
   let response

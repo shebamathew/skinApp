@@ -11,6 +11,7 @@ const ProductsService = {
     return knex.from('skinapp_products').select('*').where('id', id).first()
   },
   insertProduct(knex, newProduct){
+    console.log(newProduct)
     return knex
       .insert(newProduct)
       .into('skinapp_products')
@@ -20,6 +21,11 @@ const ProductsService = {
     return knex('skinapp_products')
       .where({ id })
       .delete()
+  }, 
+  updateProduct(knex, id, newProductFields) {
+    return knex('skinapp_products')
+      .where({ id })
+      .update(newProductFields)
   }
 }
 
